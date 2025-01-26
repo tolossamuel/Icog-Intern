@@ -1,5 +1,11 @@
-!(+ 12 (superpose (1 2)))
-(= (binary-map-add $const $array) (
-    + $const (superpose (1 2 3))
-))
-!(binary-map-add 10 (1 2 3))
+
+;; binary map
+
+( = (binary-map-add $const (:: $x Nil)) (::(+ $x $const) Nil))
+
+( = (binary-map-add $const (:: $x $xs)) 
+    (:: (+ $x $const) (binary-map-add $const $xs))
+)
+
+!(binary-map-add 14 (:: 1 (:: 3 Nil)))
+!(+ 12 (superpose (5 9)))

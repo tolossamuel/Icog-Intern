@@ -1,5 +1,3 @@
-
-
 ;; write function that sort the array
 (: sort_element (-> List List))
 (= (sort_element Nil) Nil)
