@@ -1,5 +1,4 @@
 ;; Write function to calculate sum of all natural numbers below a given number N that are multiple of 3 or 5
-
 ;; write sum-multiple function 
 ( = (sum-multiple $n) 
     (
