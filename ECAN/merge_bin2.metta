@@ -66,7 +66,7 @@
                 ($index_val $index)
 
                 ($count_value (calculateBiasWithCount $count_val $index_val $bias))
-                ($_ (remove-atom &recent-space ($index ( (count $x) (index $y) (size $i)))))
+                ($_ (remove-atom &recent-space ($index ( (count $count_val) (index $idx_val) (size $size_val)))))
                 ($_ (add-atom &recent-space ($index ( (count $count_value) (index $idx_val) (size $size_val)))))
 
             )
