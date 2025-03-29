@@ -17,18 +17,49 @@ class Knowledge:
         self.mettaKnowledge = self.metta.run( # type: ignore
             '''
             !(add-atom &self (CV ((description "Update your CV every week for HR review") (frequency 'Weekly') (importance 'High'))))
-            !(add-atom &self (Meeting ((Sunday ((description 'staff Meeting present weekly progress also weekly plan') (frequency "Weekly") (mandatory "for both staff and intern") (time "morning 7:00 Am - 8:00 AM")))
-                            (Wednesday ((description 'intern meeting present wekkly progress also weekly plan') (frequency 'weekly') (mandatory 'only for intern') (time "morning 7:00 Am - 8:00 AM"))))))
-            !(add-atom &self (Responsibility ((Attendance "Minimum 40 office hours per month") (CV "update CV every week before Sunday mid night") (Traling "attend traling every saturday")
-            )))
-            !(add-atom &self (CV ((description "the update include weekly progress"))))
-            !(add-atom &self (Mentor ((description "In Icog-Lab we have a mentorship program for intern every intern have a mentor")
-                            (change "to change a mentor you need to inform HR") (responsibility "mentor is responsible to guide intern in their project")
-                            (work "intern and mentor work together in the project that is a project of the mentor")
-                            )))
-            !(add-atom &self (Mentor-Change ((description "To change a mentor you need to inform HR") (process "To change a mentor you need to inform HR and HR will assign a new mentor for you"))))
+            !(add-atom &self (Meeting ((Sunday ((description 'Staff meeting to present weekly progress and plan') (frequency "Weekly") (mandatory "for both staff and interns") (time "7:00 AM - 8:00 AM")))
+                                (Wednesday ((description 'Intern meeting to present weekly progress and plan') (frequency 'Weekly') (mandatory 'only for interns') (time "7:00 AM - 8:00 AM"))))))
+            !(add-atom &self (Responsibility ((Attendance "Minimum 40 office hours per month") 
+                                            (CV "Update CV every week before Sunday midnight") 
+                                            (Training "Attend training every Saturday") 
+                                            (Confidentiality "Maintain confidentiality of company information and proprietary data") 
+                                            (Professionalism "Maintain professional demeanor and respect in all interactions")
+                                            (Task-Completion "Complete assigned tasks on time and report progress to supervisors")
+                                            (Documentation "Maintain proper documentation for work and progress updates"))))
+            !(add-atom &self (Mentor ((description "Each intern at iCog-Labs has a mentor for guidance") 
+                                    (change "To change a mentor, interns must inform HR") 
+                                    (responsibility "Mentors guide interns in their projects") 
+                                    (work "Interns and mentors collaborate on mentor-led projects")
+                                    (feedback "Mentors provide regular feedback to interns on performance and skill development"))))
+            !(add-atom &self (Mentor-Change ((description "To change a mentor, inform HR") 
+                                            (process "HR will assign a new mentor upon request"))))
+            !(add-atom &self (Training ((description "Training sessions are mandatory and occur on Saturdays") 
+                                        (grading "Intern performance is evaluated based on attendance and engagement") 
+                                        (courses "Interns must complete five mandatory courses during their internship")
+                                        (participation "Active participation in training is required to qualify for further internship opportunities"))))
+            !(add-atom &self (Performance-Evaluation ((description "Interns are evaluated based on performance and attendance") 
+                                                    (grouping "Top 5 in Group 1 are prioritized for intern-to-staff transition")
+                                                    (criteria "Evaluation includes punctuality, work quality, communication, and team collaboration"))))
+            !(add-atom &self (Communication ((description "Interns must maintain open communication with mentors and team members") 
+                                            (reporting "Interns should regularly update project progress and challenges") 
+                                            (official-channels "Use official channels for communication and documentation submission")
+                                            (email "Use professional email etiquette when communicating with HR and supervisors"))))
+            !(add-atom &self (Key-Contacts ((HR "icoglabs89@gmail.com, icoghrteam1@gmail.com") 
+                                            (Mentor "Assigned mentor for guidance") 
+                                            (Team-Leads "Project-specific questions directed to respective team leads"))))
+            !(add-atom &self (Work-Ethics ((Punctuality "Interns must arrive on time for meetings and work sessions") 
+                                        (Respect "Respect colleagues, mentors, and staff members") 
+                                        (Teamwork "Collaborate effectively with peers and contribute to group tasks")
+                                        (Integrity "Uphold honesty and transparency in all tasks and reporting"))))
+            !(add-atom &self (Leave-Policy ((Request "Interns must request leave in advance and get approval from HR") 
+                                            (Limitations "Unapproved absences may affect performance evaluation")
+                                            (Emergency "In case of emergencies, notify HR and mentors immediately"))))
+            !(add-atom &self (Internship-Completion ((Certificate "Interns receive a certificate upon successful completion") 
+                                                    (Extension "Outstanding interns may be offered an extended internship or job opportunity")
+                                                    (Final-Review "HR and mentors conduct a final review before internship completion"))))
             '''
         )
+
         
         self.graph = ""
         self.allKnowledge = self.metta.run('!(get-atoms &self)')
@@ -47,7 +78,8 @@ class Knowledge:
         command = f'''
         You are an AI designed to evaluate a given list of words alongside a specific question.
         Your objective is to extract and return a list of words from the initial list that are 
-        relevant, related, or mentioned in connection to the question.Input: ["CV", "Meeting", "Responsibility", "Mentor", "Mentor-Change"], 
+        relevant, related, or mentioned in connection to the question.Input: ["CV", "Meeting", "Responsibility","Mentor","Mentor-Change",
+        "Training","Performance-Evaluation","Communication","Key-Contacts", "Work-Ethics","Leave-Policy","Internship-Completion"], 
         {question} Instructions: 1.Analyze the provided question for keywords, context, and overall intent.
         2.Cross-reference the keywords and context with the list of words.
         3.Identify and extract only those words from the list that have a direct  relevance the word muest be in question or the synonym must be in the question.

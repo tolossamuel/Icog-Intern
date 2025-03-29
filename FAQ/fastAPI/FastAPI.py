@@ -8,13 +8,13 @@ import knowledge
 from knowledge import Knowledge
 app = FastAPI()
 app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["http://127.0.0.1:5500"],  # Allow frontend (change the origin if necessary)
+     CORSMiddleware,
+    allow_origins=["*"],  # Allows all domains
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all methods (GET, POST, etc.)
+    allow_methods=["*"],  # Allow all HTTP methods (GET, POST, etc.)
     allow_headers=["*"],  # Allow all headers
 )
-@app.get("/ask-her/") # type: ignore
+@app.get("/ask-hr/") # type: ignore
 async def ask_her(question: str):
     # Initialize the Knowledge object
     knowledge_obj = Knowledge()
