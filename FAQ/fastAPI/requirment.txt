@@ -1,6 +1,0 @@
-google-generativeai==0.8.4
-fastapi==0.115.12
-uvicorn==0.34.0
-hyperon==0.2.3
-google-auth==2.38.0
-python-dotenv==0.21.0
