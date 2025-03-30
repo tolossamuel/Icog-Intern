@@ -69,7 +69,7 @@ class Knowledge:
         # Handle case where domain knowledge is empty
         
         if not domain_knowledge or not domain_knowledge[0]:
-            domain_knowledge = "for specific  this type of question pleas contact HR with email icoghrteam1@gmail"
+            domain_knowledge = "for specific  this type of question pleas contact HR with email icoghrteam1@gmail.com"
         
         return domain_knowledge
 
