@@ -43,7 +43,7 @@ class Knowledge:
         1.Analyze the provided question for keywords, context, and overall intent.
         2.Cross-reference the keywords and context with the list of words.
         3.Identify and extract only those words from the list that have a direct  relevance the word muest be in question or the synonym must be in the question.
-        4. return only list of word not other format the format must be ["word1", "word2", "word3"].
+        4. return only list of word not other format the format must be ["word1", "word2", "word3"] if not word return [] empty list.
         '''
         
         # Generate response from model
@@ -74,7 +74,6 @@ class Knowledge:
     
     def getAnswer(self, question):
         domain_knowledge = obj.processQuestion(question)
-        
         comand = f'''
         You are an AI designed to provide comprehensive and formal responses utilizing specified domain knowledge.
         Please ensure that your responses reflect the professionalism and thoroughness expected of a Human Resources representative.

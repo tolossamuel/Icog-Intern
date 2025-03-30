@@ -26,12 +26,10 @@ def send_telegram_message(chat_id: int, answer: str):
         "text": answer
     }
     response = requests.post(url, data=payload)
-    print(response.json())
     return response
 @app.post("/ask-hr/")
 async def ask_her_post(request: Request):
     data = await request.json()
-    print("Received Webhook Data:", json.dumps(data, indent=2))
     if "message" in data and "text" in data["message"]:
         question = data["message"]["text"]
     else:
