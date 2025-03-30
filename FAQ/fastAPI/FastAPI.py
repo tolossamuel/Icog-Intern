@@ -37,7 +37,7 @@ async def ask_her_post(request: Request):
     else:
         return {"error": "Invalid request"}
     
-        
+    
     knowledge_obj = Knowledge()
     answer = knowledge_obj.getAnswer(question)
     chat_id = data["message"]["chat"]["id"]
