@@ -57,11 +57,36 @@ class Knowledge:
             !(add-atom &self (Internship-Completion ((Certificate "Interns receive a certificate upon successful completion") 
                                                     (Extension "Outstanding interns may be offered an extended internship or job opportunity")
                                                     (Final-Review "HR and mentors conduct a final review before internship completion"))))
+            !(add-atom &self (Hello ((description "Hello, I am an AI designed to assist with HR-related queries")
+                                    (functionality "I can provide information on company policies, responsibilities, and HR procedures")
+                                    (knowledge "I have access to the latest HR data and guidelines")
+                                    (limitations "I cannot provide legal advice or personal opinions"))))
+            !(add-atom &self (Goodbye ((description "Goodbye, I hope I was able to assist you with your HR query")
+                                    (functionality "I can provide information on company policies, responsibilities, and HR procedures")
+                                    (knowledge "I have access to the latest HR data and guidelines")
+                                    (limitations "I cannot provide legal advice or personal opinions"))))
+            !(add-atom &self (help ((description "I can provide information on company policies, responsibilities, and HR procedures")
+                                    (functionality "I have access to the latest HR data and guidelines")
+                                    (limitations "I cannot provide legal advice or personal opinions"))))
+            !(add-atom &self (HR-Query ((description "I can provide information on company policies, responsibilities, and HR procedures")
+                                    (functionality "I have access to the latest HR data and guidelines")
+                                    (limitations "I cannot provide legal advice or personal opinions"))))
+            !(add-atom &self (HR-Response ((description "I can provide information on company policies, responsibilities, and HR procedures")
+                                    (functionality "I have access to the latest HR data and guidelines")
+                                    (limitations "I cannot provide legal advice or personal opinions"))))
+            !(add-atom &self (start ((description "Hello, I am an AI designed to assist with HR-related queries at Icog-Lab AI research center")
+                                    (functionality "I can provide information on company policies, responsibilities, and HR procedures")
+                                    (knowledge "I have access to the latest HR data and guidelines")
+                                    (limitations "I cannot provide legal advice or personal opinions"))))
+            
+            
             '''
         )
 
         
-        self.graph = ""
+        self.graph = ["CV", "Meeting", "Responsibility","Mentor","Mentor-Change",
+        "Training","Performance-Evaluation","Communication","Key-Contacts", "Work-Ethics","Leave-Policy","Internship-Completion",
+        "Hello","Goodbye","help","HR-Query","HR-Response","start"]
         self.allKnowledge = self.metta.run('!(get-atoms &self)')
     def query(self, query):
         
@@ -78,9 +103,8 @@ class Knowledge:
         command = f'''
         You are an AI designed to evaluate a given list of words alongside a specific question.
         Your objective is to extract and return a list of words from the initial list that are 
-        relevant, related, or mentioned in connection to the question.Input: ["CV", "Meeting", "Responsibility","Mentor","Mentor-Change",
-        "Training","Performance-Evaluation","Communication","Key-Contacts", "Work-Ethics","Leave-Policy","Internship-Completion"], 
-        {question} Instructions: 1.Analyze the provided question for keywords, context, and overall intent.
+        relevant, related, or mentioned in connection to the question.Input:  {self.graph} {question} Instructions: 
+        1.Analyze the provided question for keywords, context, and overall intent.
         2.Cross-reference the keywords and context with the list of words.
         3.Identify and extract only those words from the list that have a direct  relevance the word muest be in question or the synonym must be in the question.
         4. return only list of word not other format the format must be ["word1", "word2", "word3"].
@@ -105,9 +129,9 @@ class Knowledge:
             domain_knowledge.append(self.query(word)[0])
 
         # Handle case where domain knowledge is empty
-        print(domain_knowledge)
+        
         if not domain_knowledge or not domain_knowledge[0]:
-            domain_knowledge = "No domain knowledge, use your own knowledge"
+            domain_knowledge = "for specific  this type of question pleas contact HR"
         
         return domain_knowledge
 
@@ -122,7 +146,8 @@ class Knowledge:
         that align with HR best practices.You are to integrate the provided domain knowledge and respond to the input question 
         by synthesizing relevant information, including synonyms and related concepts, to enhance your response.Your training encompasses 
         data up until October 2023, and you must utilize this knowledge effectively.Input domain_knowledge: {domain_knowledge} Input question: {question} 
-        Please respond with a well-articulated, formal paragraph that comprehensively addresses the question while showcasing your domain expertise.
+        Please respond with a well-articulated, formal paragraph that comprehensively addresses the question while showcasing your domain expertise and the respond must beon
+        only python string with out any special other character.
         '''
         response = self.client.generate_content(
              comand
