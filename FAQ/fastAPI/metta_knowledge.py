@@ -64,7 +64,29 @@ metta_knowledge = '''
                                     (functionality "I can provide information on company policies, responsibilities, and HR procedures")
                                     (knowledge "I have access to the latest HR data and guidelines")
                                     (limitations "I cannot provide legal advice or personal opinions"))))
-            
-            
+            !(add-atom &self (contact ("HR contact email icoglabs89@gmail.com, icoghrteam1@gmail.com" )))
+            !(add-atom &self (Apply-Internship ((description "To apply for an internship, submit your CV and cover letter to HR")
+                                    (eligibility "Internships are open to students and recent graduates")
+                                    (selection "Candidates are selected based on qualifications and interview performance")
+                                    (duration "Internships typically last 3-6 months"))))
+            !(add-atom &self (Working-Hours (description "Interns are expected to work a minimum of 40 hours per month")))
+            !(add-atom &self (Office-Hours ((description "Office hours are from 8:00 AM to 8:00 PM, Monday to Saturday and also Sunday the office is open but may be in it will be closed so contact before coming"))))
+            !(add-atom &sefl (Icong-Lab-Location (description "Icog-Labs is located at Bole wello sefer at Atlas Building, Addis Ababa, Ethiopia")))
+            !(add-atom &self (Internship-Opportunity ((description "Interns may be offered job opportunities based on performance and availability")
+                                    (criteria "Top interns are considered for job openings at Icog-Labs")
+                                    (transition "Successful interns may transition to full-time staff positions"))))
+            !(add-atom &self (Internship-Feedback ((description "Interns receive feedback on performance and progress regularly")
+                                    (improvement "Feedback is provided to help interns improve their skills and performance")
+                                    (evaluation "Performance evaluations are conducted to assess intern progress and development"))))
+            !(add-atom &self (Internship-Training ((description "Training sessions are conducted to enhance intern skills and knowledge")
+                                    (topics "Training covers various topics relevant to AI research and development")
+                                    (participation "Active participation in training is required for intern development")))
+            !(add-atom &self (Evaluation ((Posetive evaluation for every training task you will be evaluated based on your performance for the task
+                                        also for every complition of course you will be evaluated) (negative evaluation if you miss meeting or training you will
+                                        get negative evaluation also if you don't submit your task on time you will get negative evaluation consider as
+                                        you didn't present on the training) (based on this evaluation you will be assigned to specific group for training)
+                                        )))
+            !(add-atom &self (Evaluation-Grouping ((Group1 are prioritized for intern-to-staff transition)
+                                                    (to join ICOG-Lab staff you must be in group1))))
+            !(add-atom &self (Greating (description give your greating to the user and ask how you can help)))
             '''
-    

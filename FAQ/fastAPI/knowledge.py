@@ -20,9 +20,11 @@ class Knowledge:
         )
 
         
-        self.graph = ["CV", "Meeting", "Responsibility","Mentor","Mentor-Change",
+        self.graph = ["CV", "Greating","Meeting", "Responsibility","Mentor","Mentor-Change",
         "Training","Performance-Evaluation","Communication","Key-Contacts", "Work-Ethics","Leave-Policy","Internship-Completion",
-        "Hello","Goodbye","help","HR-Query","HR-Response","start"]
+        "Hello","Goodbye","help","HR-Query","HR-Response","start","contact","Apply-Internship","Working-Hours",
+        "Office-Hours","Icong-Lab-Location","Internship-Opportunity","Internship-Feedback","Internship-Training",
+        "Evaluation","Evaluation-Grouping"]
         self.allKnowledge = self.metta.run('!(get-atoms &self)')
     def query(self, query):
         
@@ -67,7 +69,7 @@ class Knowledge:
         # Handle case where domain knowledge is empty
         
         if not domain_knowledge or not domain_knowledge[0]:
-            domain_knowledge = "for specific  this type of question pleas contact HR"
+            domain_knowledge = "for specific  this type of question pleas contact HR with email icoghrteam1@gmail"
         
         return domain_knowledge
 
@@ -77,7 +79,7 @@ class Knowledge:
         comand = f'''
         You are an AI designed to provide comprehensive and formal responses utilizing specified domain knowledge.
         Please ensure that your responses reflect the professionalism and thoroughness expected of a Human Resources representative.
-        Structure your output in a coherent paragraph format, elaborating on key points and providing detailed explanations 
+        Structure your output in a coherent paragraph format, elaborating on key points and explanations 
         that align with HR best practices.You are to integrate the provided domain knowledge and respond to the input question 
         by synthesizing relevant information, including synonyms and related concepts, to enhance your response.Your training encompasses 
         data up until October 2023, and you must utilize this knowledge effectively.Input domain_knowledge: {domain_knowledge} Input question: {question} 
