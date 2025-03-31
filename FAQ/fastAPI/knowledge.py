@@ -8,31 +8,26 @@ from metta_knowledge import metta_knowledge
 
 
 class Knowledge:
-    def __init__(self):
+    def __init__(self,graph):
         load_dotenv()
         api_key = os.getenv("API_KEY")
         genai.configure(api_key = api_key )
         self.client = genai.GenerativeModel("gemini-2.0-flash")
         
         self.metta  = MeTTa() # type: ignore
-        self.mettaKnowledge = self.metta.run( # type: ignore
-            metta_knowledge
-        )
+        
 
         
-        self.graph = ["CV", "Greeting","Meeting", "Responsibility","Mentor","Mentor-Change",
-        "Training","Performance-Evaluation","Communication","Key-Contacts", "Work-Ethics","Leave-Policy","Internship-Completion",
-        "Hello","Goodbye","help","HR-Query","HR-Response","start","contact","Apply-Internship","Working-Hours",
-        "Office-Hours","Icong-Lab-Location","Internship-Opportunity","Internship-Feedback","Internship-Training",
-        "Evaluation","Evaluation-Grouping"]
+        self.graph = graph
         self.allKnowledge = self.metta.run('!(get-atoms &self)')
     def query(self, query):
         
         result = self.metta.run(f'!(match &self ({query} $x) $x)')
+   
         relation = self.metta.run(
-            f'!(match &self (CV have-relation $x) (collapse (match &self ($x $y) $y)))'
+            f'!(match &self ({query} have-relation $x) (collapse (match &self ($x $y) $y)))'
         )
-     
+    
         return result +  relation
     def addKnowledge(self, newKnowledge):
         self.metta.run(f'!(add-atom &self {newKnowledge})')
@@ -84,7 +79,8 @@ class Knowledge:
 
     
     def getAnswer(self, question):
-        domain_knowledge = obj.processQuestion(question)
+        
+        domain_knowledge = self.processQuestion(question)
         comand = f'''
         You are an AI designed to provide comprehensive and formal responses utilizing specified domain knowledge.
         Please ensure that your responses reflect the professionalism and thoroughness expected of a Human Resources representative.
@@ -101,8 +97,36 @@ class Knowledge:
         
        
         return response.text
-obj = Knowledge()
+    def extractAndAddKnowledge(self, question):
+        command = f'''
+            You are an AI assistant. Your task is to extract the most relevant key word 
+            from the provided description. one word that best represents the core topic of the description.
+            
+            Instructions:
+            Analyze the description to identify the central theme.
+            Extract only one key word that encapsulates the main idea.
+            Exclude filler words, minor details, and unnecessary information.
+            Return only the single most relevant word in Python list format: ["keyword"].
+            ***Input***
+            {question}
+            '''
+        response = self.client.generate_content(
+             command
+        )
+        try:
+            converted_list = json.loads(response.text)  # use json.loads() for JSON data
+        except json.JSONDecodeError:
+            try:
+                converted_list = ast.literal_eval(response.text)
+            except Exception as e:
+               
+                return "Error parsing the response"
 
+        for word in converted_list:
+            self.metta.run(f"!(add-atom &self ({word} ({question})))")
+            self.graph.append(word)
+  
+        return "Successfully added!!"
+        
+        
 
-# print(domain_knowledge)
-obj.getAnswer("what is the responsibility of intern")
