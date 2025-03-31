@@ -20,7 +20,7 @@ class Knowledge:
         )
 
         
-        self.graph = ["CV", "Greating","Meeting", "Responsibility","Mentor","Mentor-Change",
+        self.graph = ["CV", "Greeting","Meeting", "Responsibility","Mentor","Mentor-Change",
         "Training","Performance-Evaluation","Communication","Key-Contacts", "Work-Ethics","Leave-Policy","Internship-Completion",
         "Hello","Goodbye","help","HR-Query","HR-Response","start","contact","Apply-Internship","Working-Hours",
         "Office-Hours","Icong-Lab-Location","Internship-Opportunity","Internship-Feedback","Internship-Training",
@@ -29,8 +29,11 @@ class Knowledge:
     def query(self, query):
         
         result = self.metta.run(f'!(match &self ({query} $x) $x)')
+        relation = self.metta.run(
+            f'!(match &self (CV have-relation $x) (collapse (match &self ($x $y) $y)))'
+        )
      
-        return result
+        return result +  relation
     def addKnowledge(self, newKnowledge):
         self.metta.run(f'!(add-atom &self {newKnowledge})')
         return "Done"
@@ -39,20 +42,26 @@ class Knowledge:
 
     def processQuestion(self, question):
         command = f'''
-        You are an AI designed to evaluate a given list of words alongside a specific question.
-        Your objective is to extract and return a list of words from the initial list that are 
-        relevant, related, or mentioned in connection to the question.Input:  {self.graph} {question} Instructions: 
-        1.Analyze the provided question for keywords, context, and overall intent.
-        2.Cross-reference the keywords and context with the list of words.
-        3.Identify and extract only those words from the list that have a direct  relevance the word muest be in question or the synonym must be in the question.
-        4. return only list of word not other format the format must be ["word1", "word2", "word3"] if not word return [] empty list.
+        You are an AI that extracts relevant words from a given list based on a question.
+        **Input:**
+        - List of words: {self.graph}
+        - Question: {question}
+        
+        **Instructions:**
+        1. Identify words from the provided list that are explicitly mentioned in the question or have synonyms in the question.
+        2. Return only the matching words in a Python list format.
+        3. If no words match, return an empty list: `[]`.
+        4. Do not include any explanations, metadata, or formatting other than the list itself.
+        
+        **Output format:**
+        ["word1", "word2", "word3"]
         '''
         
         # Generate response from model
+        
         response = self.client.generate_content(
             command
         )
-   
         try:
             converted_list = json.loads(response.text)  # use json.loads() for JSON data
         except json.JSONDecodeError:
