@@ -1,0 +1,127 @@
+/* src/assets/styles/App.css */
+
+/* ... (your existing body, App, App-header, InputForm styles from previous examples) ... */
+
+.place-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+  gap: 25px; /* Space between cards */
+  padding: 20px;
+  max-width: 1200px; /* Limit overall width of the list */
+  margin: 30px auto; /* Center the list */
+}
+
+.place-list h2 {
+  grid-column: 1 / -1; /* Make title span all columns */
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2rem;
+  color: #e0e0e0; /* Light color for dark theme */
+}
+
+.place-card {
+  background-color: #3a3f47; /* Dark card background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Softer shadow */
+  overflow: hidden; /* To make sure image corners are also rounded */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column; /* Stack image and content vertically */
+}
+
+.place-card:hover {
+  transform: translateY(-8px) scale(1.02); /* Lift and slightly enlarge card on hover */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.place-card-image {
+  width: 100%;
+  height: 180px; /* Fixed height for the image */
+  object-fit: cover; /* Ensures the image covers the area, cropping if necessary */
+  display: block; /* Removes any extra space below the image */
+}
+
+.place-card-content {
+  padding: 18px;
+  flex-grow: 1; /* Allows content to expand if cards have different content heights */
+  display: flex;
+  flex-direction: column;
+}
+
+.place-card-title {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #61dafb; /* React blue or your theme color */
+  font-size: 1.5rem;
+}
+
+.place-card-score {
+  font-size: 1rem;
+  color: #bdbdbd;
+  margin-bottom: 10px;
+}
+
+.place-card-score strong {
+  color: #fdd835; /* A gold-like color for the score value */
+  font-weight: bold;
+}
+
+.place-card-description {
+  font-size: 0.9rem;
+  color: #c0c0c0;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  flex-grow: 1; /* Pushes the button to the bottom if content height varies */
+}
+
+.place-card-button {
+  display: inline-block;
+  padding: 10px 15px;
+  background-image: linear-gradient(to right, #56ccf2 0%, #2f80ed 51%, #56ccf2 100%);
+  background-size: 200% auto;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 20px; /* Pill-shaped button */
+  font-weight: bold;
+  transition: background-position 0.3s ease, transform 0.2s ease;
+  align-self: flex-start; /* Align button to the start if content is short */
+  margin-top: auto; /* Pushes button to the bottom with flex-grow on description */
+}
+
+.place-card-button:hover {
+  background-position: right center; /* Change gradient direction on hover */
+  transform: scale(1.03);
+}
+
+/* Loading and Error Messages */
+.loading-message, .error-message {
+  font-size: 1.1rem;
+  padding: 15px 20px;
+  border-radius: 6px;
+  margin: 20px auto;
+  text-align: center;
+  width: fit-content;
+  max-width: 80%;
+}
+
+.loading-message {
+  background-color: #424242;
+  color: #e0e0e0;
+}
+.loading-message strong {
+  color: #82d8ff;
+}
+
+.error-message {
+  background-color: #c62828; /* A deep red for errors */
+  color: white;
+}
+
+/* Styles for the header paragraph in App.js */
+.App-header p {
+  font-size: 1.1rem;
+  color: #b0b0b0;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
