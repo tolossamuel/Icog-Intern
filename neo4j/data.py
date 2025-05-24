@@ -3,7 +3,7 @@ from py2neo import Graph, Node, Relationship
 import random
 
 fake = Faker()
-graph = Graph("bolt://localhost:7687", auth=("neo4j", "cr8UuA6Te6Gyt_U"))
+
 
 # Categories and cities
 categories = ["Museum", "Park", "Hotel", "Beach", "Restaurant"]

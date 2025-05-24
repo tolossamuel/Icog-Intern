@@ -5,7 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 
 # Connect to Neo4j
-graph = Graph("bolt://localhost:7687", auth=("neo4j", "cr8UuA6Te6Gyt_U"))
+
 
 # Input schema
 class UserRequest(BaseModel):
